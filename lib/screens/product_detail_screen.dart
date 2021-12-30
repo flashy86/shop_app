@@ -14,7 +14,7 @@ class ProductDetailScreen extends StatelessWidget {
      final productId = ModalRoute.of(context).settings.arguments as String; // is the id!
       final loadedProduct = Provider.of<Products>(
       context,
-      listen: false,
+      listen: false, //pour ne pas metre a jour une fois que c'est construit
     ).findById(productId);
        return Scaffold(
       appBar: AppBar(
