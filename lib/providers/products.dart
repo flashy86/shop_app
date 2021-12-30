@@ -39,15 +39,23 @@ class Products with ChangeNotifier {
     ),
   ]; //on veut que cette liste soit innaccessible de l'extérieur à cette classe, donc on crée le getter ci dessous.
 
+  var _showFavoriteOnly = false;
+
   List<Product> get items {
+    if (_showFavoriteOnly) {
+      return _items.where((prodItem) => prodItem.isFavorite).toList();
+    }
     return [
       ..._items
     ]; //permet de faire une copie avec la mise en crochet et le caractère d'échappement
   }
+
 /*
 Pourquoi on utilise pas directement le _items? si on l'utilisait dans les autres fichiers, cette variable pointerait vers l'adresse en mémoire Ce n'est pas le comportement souhaité, car on a besoin d'utiliser une méthode spécifique afin d'utiliser les listeneurs du Provider. A chaque fois que l'on voudra faire des modifications sur la liste d'_items on passera par cette classe. Cela permet que les widgets utilisant cette classe seront reconstruits lors des modifications de la liste de Product.
-
 */
+  List<Product> get FavoriteItems {
+    return _items.where((prodItem) => prodItem.isFavorite).toList();
+  }
 
   Product findById(String id) {
     return _items.firstWhere((prod) => prod.id == id);
@@ -57,4 +65,14 @@ Pourquoi on utilise pas directement le _items? si on l'utilisait dans les autres
     // _items.add(value);
     notifyListeners();
   }
+
+  /* void showFavoritesOnly() {
+    _showFavoriteOnly = true;
+    notifyListeners();
+  } */
+
+  /* void showAll() {
+    _showFavoriteOnly = false;
+    notifyListeners();
+  } */
 }

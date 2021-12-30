@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
+//import 'package:provider/provider.dart';
+//import 'package:shop_app/providers/products.dart';
 
 import '../widgets/products_grid.dart';
 
-class ProductsOverviewScreen extends StatelessWidget {
+enum FiltersOptions {
+  Favorites,
+  All,
+}
+
+class ProductsOverviewScreen extends StatefulWidget {
+  @override
+  State<ProductsOverviewScreen> createState() => _ProductsOverviewScreenState();
+}
+
+class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   /* final List<Product> loadedProducts = [ Product(
       id: 'p1',
       title: 'Red Shirt',
@@ -36,14 +48,41 @@ class ProductsOverviewScreen extends StatelessWidget {
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
     ),
   ]; */
+  var _showFavoritesOnly = false;
   @override
   Widget build(BuildContext context) {
-    var scaffold = Scaffold(
+    // final productsContainer = Provider.of<Products>(context, listen: false);
+    return Scaffold(
       appBar: AppBar(
         title: const Text('My Shop'),
+        actions: <Widget>[
+          PopupMenuButton(
+              onSelected: (selectedValue) {
+                setState(() {
+                  if (selectedValue == FiltersOptions.Favorites) {
+                    //productsContainer.showFavoritesOnly();
+                    _showFavoritesOnly = true;
+                  } else {
+                    //productsContainer.showAll();
+                    _showFavoritesOnly = false;
+                  }
+                  ;
+                });
+              },
+              icon: Icon(Icons.more_vert),
+              itemBuilder: (_) => [
+                    PopupMenuItem(
+                      child: Text('Only Favourites'),
+                      value: FiltersOptions.Favorites,
+                    ),
+                    PopupMenuItem(
+                      child: Text('Show All'),
+                      value: FiltersOptions.All,
+                    )
+                  ])
+        ],
       ),
-      body: ProductsGrid(),
+      body: ProductsGrid(_showFavoritesOnly),
     );
-    return scaffold;
   }
 }
