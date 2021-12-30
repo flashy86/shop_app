@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../models/product.dart';
 import '../widgets/products_grid.dart';
 
 class ProductsOverviewScreen extends StatelessWidget {
-  final List<Product> loadedProducts = [ Product(
+  /* final List<Product> loadedProducts = [ Product(
       id: 'p1',
       title: 'Red Shirt',
       description: 'A red shirt - it is pretty red!',
@@ -36,7 +35,7 @@ class ProductsOverviewScreen extends StatelessWidget {
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
     ),
-  ];
+  ]; */
   @override
   Widget build(BuildContext context) {
     var scaffold = Scaffold(
