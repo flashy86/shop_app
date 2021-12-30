@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../models/product.dart';
-import '../widgets/product_item.dart';
+import '../widgets/products_grid.dart';
 
 class ProductsOverviewScreen extends StatelessWidget {
-  final List<Product> loadedProducts = [
-    Product(
+  final List<Product> loadedProducts = [ Product(
       id: 'p1',
       title: 'Red Shirt',
       description: 'A red shirt - it is pretty red!',
@@ -40,22 +39,12 @@ class ProductsOverviewScreen extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    var scaffold = Scaffold(
       appBar: AppBar(
         title: const Text('My Shop'),
       ),
-      body: GridView.builder(
-        padding: const EdgeInsets.all(10),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 3 / 2,
-            crossAxisSpacing: 10,
-            mainAxisSpacing:
-                10), //le grid delegate indique comment la grille doit être structurée, c'est ici que l'on définit le nombre de colonnes et de lignes par ex alors que l'itembBuilder est le générateur d'éléments, il définit la façon dont chaque élément de la grille est construit. On pourrait dire que l'itemBuilder est le fond alors que gridDelegate est la forme. SliverGridDelegateWithFixedCrossAxisCount: on indique le nombre d'éléments que l'on souhaite par ligne par ex, puis c'est ce widget qui s'occupe de la taille des éléments pour que cela rentre dans la grille.
-        itemBuilder: (ctx, i) => ProductItem(loadedProducts[i].id,
-            loadedProducts[i].title, loadedProducts[i].imageUrl),
-        itemCount: loadedProducts.length,
-      ),
+      body: ProductsGrid(),
     );
+    return scaffold;
   }
 }

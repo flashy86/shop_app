@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
 class Product {
@@ -13,6 +14,6 @@ class Product {
       @required this.title,
       @required this.description,
       @required this.price,
-      @required this.isFavorite,
+      this.isFavorite = false,
       @required this.imageUrl});
 }
