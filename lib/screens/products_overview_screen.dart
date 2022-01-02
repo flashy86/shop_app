@@ -4,7 +4,9 @@ import 'package:provider/provider.dart';
 
 import '../widgets/products_grid.dart';
 import '../widgets/badge.dart';
+import '../widgets/app_drawer.dart';
 import '../providers/cart.dart';
+import '../screens/cart_screen.dart';
 
 enum FiltersOptions {
   Favorites,
@@ -85,18 +87,21 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           ),
           Consumer<Cart>(
             builder: (_, cart, ch) => Badge(
-              child: ch	,
+              child: ch,
               value: cart.itemCount.toString(),
             ),
             child: IconButton(
-                icon: Icon(
-                  Icons.shopping_cart,
-                ),
-                onPressed: () {},
+              icon: Icon(
+                Icons.shopping_cart,
               ),
+              onPressed: () {
+                Navigator.of(context).pushNamed(CartScreen.routeName);
+              },
+            ),
           )
         ],
       ),
+      drawer: AppDrawer(),
       body: ProductsGrid(_showOnlyFavorites),
     );
   }

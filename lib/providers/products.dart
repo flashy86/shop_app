@@ -39,12 +39,12 @@ class Products with ChangeNotifier {
     ),
   ]; //on veut que cette liste soit innaccessible de l'extérieur à cette classe, donc on crée le getter ci dessous.
 
-  var _showFavoriteOnly = false;
+  //var _showFavoriteOnly = false;
 
   List<Product> get items {
-    if (_showFavoriteOnly) {
-      return _items.where((prodItem) => prodItem.isFavorite).toList();
-    }
+   // if (_showFavoriteOnly) {
+   //   return _items.where((prodItem) => prodItem.isFavorite).toList();
+   // }
     return [
       ..._items
     ]; //permet de faire une copie avec la mise en crochet et le caractère d'échappement
